@@ -58,7 +58,6 @@ namespace menu::ui
         void draw_controller(ImVec2 min, ImVec2 max);
         void layout_callouts(ImVec2 image_min, ImVec2 image_size, ImVec2 area_min, ImVec2 area_max);
         void draw_callouts();
-        void draw_scripts(ImVec2 min, ImVec2 max);
         void update_parts();
         float entrance(std::size_t part, float delay) const;
         void set_selected(int part);

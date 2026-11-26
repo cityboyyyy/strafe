@@ -21,7 +21,7 @@ namespace menu::ui::widgets
         constexpr float icon_gap = 8.0f;
         constexpr float pad = 16.0f;
         constexpr float pad_icon = 6.0f;
-        constexpr float font_size = 14.5f;
+        constexpr float font_size = 13.5f;
         constexpr float bubble_gap = 3.0f;
         constexpr float goo_size = 9.0f;
         constexpr float char_stagger = 0.055f;
@@ -194,7 +194,7 @@ namespace menu::ui::widgets
 
         const ImU32 background = IM_COL32(37, 37, 40, 255);
         const ImU32 background_hover = IM_COL32(45, 45, 49, 255);
-        const ImU32 text_color = paint::to_u32(paint::mix(ImVec4(accent.x, accent.y, accent.z, 1.0f), ImVec4(1.0f, 1.0f, 1.0f, 1.0f), 0.18f));
+        const ImU32 text_color = paint::rgba(0.95f, 0.95f, 0.96f, 1.0f);
         const ImU32 icon_background = paint::to_u32(ImVec4(accent.x, accent.y, accent.z, 1.0f));
         const ImU32 glow = paint::to_u32(ImVec4(accent.x, accent.y, accent.z, 0.55f));
 

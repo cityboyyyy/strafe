@@ -431,11 +431,11 @@ namespace menu::ui
         ImGui::PopFont();
         text(draw, fonts::get(fonts::role::strong), 22.0f, ImVec2(text_x, back_center.y - title_height * 0.5f), paint::to_u32(text_primary), "Bindings");
 
-        constexpr const char* tabs[] = { "Controller", "Curvature", "Scripts" };
-        const float tabs_width = widgets::segmented_width(tabs, 3);
+        constexpr const char* tabs[] = { "Controller", "Curvature" };
+        const float tabs_width = widgets::segmented_width(tabs, 2);
         const ImVec2 tabs_center{ origin.x + size.x * 0.5f, back_center.y };
         window::add_drag_hole({ tabs_center.x - tabs_width * 0.5f - 4.0f * s - viewport_origin.x, tabs_center.y - 21.0f * s - viewport_origin.y, tabs_width + 8.0f * s, 42.0f * s });
-        if (widgets::segmented("##tabs", tabs, 3, tab_, tabs_center) && tab_ != 0)
+        if (widgets::segmented("##tabs", tabs, 2, tab_, tabs_center) && tab_ != 0)
             set_selected(-1);
 
         draw_driver_prompt(ImVec2(origin.x + size.x - 24.0f * s, origin.y + 34.0f * s));
@@ -821,7 +821,7 @@ namespace menu::ui
                 draw_editor(ImVec2(editor_left, content_top), ImVec2(right, content_bottom), open);
             toast_center = (origin.x + 20.0f * s + column_left - 18.0f * s) * 0.5f;
         }
-        else if (tab_ == 1)
+        else
         {
             if (curve_.draw(ImVec2(origin.x + 28.0f * s, content_top), ImVec2(right, content_bottom), aim_, accent_of(catalog_index_)))
             {
@@ -830,35 +830,8 @@ namespace menu::ui
                     engine_->set_aim(to_engine(aim_));
             }
         }
-        else
-        {
-            draw_scripts(ImVec2(origin.x + 28.0f * s, content_top), ImVec2(right, content_bottom));
-        }
         draw_toast(ImVec2(toast_center, origin.y + size.y - 34.0f * s));
         return back_requested_;
-    }
-
-    void remap_view::draw_scripts(ImVec2 min, ImVec2 max)
-    {
-        const float s = ImGui::GetStyle().FontScaleDpi;
-        ImDrawList* draw = ImGui::GetWindowDrawList();
-        const float corner = 18.0f * s;
-        draw->AddRectFilled(min, max, paint::rgba(0.05f, 0.05f, 0.058f, 0.84f), corner);
-        draw->AddRect(min, max, paint::rgba(1.0f, 1.0f, 1.0f, 0.075f), corner, 0, 1.0f);
-        const ImVec2 center{ (min.x + max.x) * 0.5f, (min.y + max.y) * 0.5f };
-        const float arm = 12.0f * s;
-        const ImU32 glyph = paint::rgba(1.0f, 1.0f, 1.0f, 0.22f);
-        const ImVec2 left[] = { ImVec2(center.x - arm * 1.2f, center.y - 24.0f * s - arm), ImVec2(center.x - arm * 2.2f, center.y - 24.0f * s), ImVec2(center.x - arm * 1.2f, center.y - 24.0f * s + arm) };
-        const ImVec2 right[] = { ImVec2(center.x + arm * 1.2f, center.y - 24.0f * s - arm), ImVec2(center.x + arm * 2.2f, center.y - 24.0f * s), ImVec2(center.x + arm * 1.2f, center.y - 24.0f * s + arm) };
-        paint::round_polyline(draw, left, 3, glyph, 2.2f * s);
-        paint::round_polyline(draw, right, 3, glyph, 2.2f * s);
-        const ImVec2 slash[] = { ImVec2(center.x + arm * 0.4f, center.y - 24.0f * s - arm * 1.1f), ImVec2(center.x - arm * 0.4f, center.y - 24.0f * s + arm * 1.1f) };
-        paint::round_polyline(draw, slash, 2, glyph, 2.2f * s);
-        ImGui::PushFont(nullptr, 13.0f);
-        const char* label = "Scripts are coming next";
-        const ImVec2 extent = ImGui::CalcTextSize(label);
-        draw->AddText(ImVec2(std::round(center.x - extent.x * 0.5f), std::round(center.y + 10.0f * s)), paint::rgba(0.5f, 0.5f, 0.54f, 1.0f), label);
-        ImGui::PopFont();
     }
 
     void remap_view::connect_pad()
