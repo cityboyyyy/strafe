@@ -1,0 +1,8 @@
+build/
+bin/
+_old/
+refs/
+.vs/
+*.user
+*.aps
+src/tools/

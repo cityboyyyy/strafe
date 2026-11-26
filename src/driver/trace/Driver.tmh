@@ -1,0 +1,13 @@
+#pragma once
+
+#ifndef TraceEvents
+#define TraceEvents(...) ((void)0)
+#endif
+
+#ifndef Trace
+#define Trace(...) ((void)0)
+#endif
+
+#ifndef WPP_CLEANUP
+#define WPP_CLEANUP(...) ((void)0)
+#endif

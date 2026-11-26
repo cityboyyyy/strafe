@@ -1,0 +1,9 @@
+#pragma once
+
+#ifndef TraceEvents
+#define TraceEvents(...) ((void)0)
+#endif
+
+#ifndef Trace
+#define Trace(...) ((void)0)
+#endif
